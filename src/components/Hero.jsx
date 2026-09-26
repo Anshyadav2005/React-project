@@ -1,9 +1,8 @@
 import { Star } from "lucide-react";
 const Hero = (props) => {
-  console.log(props.MovieData?.vote_average)
   const img = props.MovieData?.backdrop_path;
   const imgPath = img ? `https://image.tmdb.org/t/p/original${img}` : "";
-  const rating = Math.floor(((props.MovieData?.vote_average) / 2 ) *10 )/10 ;
+  const rating = Math.floor((props.MovieData?.vote_average / 2) * 10) / 10;
 
   return (
     <div className="h-[60%] w-full flex overflow-hidden font-inter rounded-2xl ">
@@ -16,9 +15,13 @@ const Hero = (props) => {
         <p className="text-sm">{props.MovieData?.overview}</p>
         <div className="flex gap-2 text-yellow-400">
           {[1, 2, 3, 4, 5].map((star) => (
-            <Star key={star} size={25} fill= {star <= (rating) ? "currentColor" : "none"} />
+            <Star
+              key={star}
+              size={25}
+              fill={star <= rating ? "currentColor" : "none"}
+            />
           ))}
-          <span className="text-[#FFFFFF]">{rating}</span>
+          <span className="text-[#FFFFFF]">{rating ? rating.toFixed(1) : "N/A"}</span>
         </div>
         <div className="flex gap-4">
           <button className="active:scale-95 bg-red-600 py-2 px-4 rounded-lg ">
